@@ -47,8 +47,9 @@ function insert_categories_ajax()
 
             $create_category_query = mysqli_query($connection, $query);
             $message = "Category added successfully";
-            $query = "SELECT cat_id FROM categories WHERE cat_title = {$cat_title}";
+            $query = "SELECT * FROM categories";
             $result = mysqli_query($connection, $query);
+            $row = mysqli_fetch_assoc($result);
             if (!$create_category_query) {
                 $message = "Failed to add a new category.";
                 $responseCode = 500;
@@ -61,8 +62,7 @@ function insert_categories_ajax()
     http_response_code($responseCode);
     $response = array(
         'message' => $message,
-        'catId' => $result,
-        'catTitle' => $cat_title,
+        'tableData' => $row,
     );
     $test = json_encode($response);
     echo json_encode($response);
