@@ -1,0 +1,3 @@
+
+ A line added to file with file_put_contents function
+ A line added to file with file_put_contents function with append flag
