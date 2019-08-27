@@ -14,8 +14,14 @@
                 success: function (response, status, request) {
                     $('input[name="cat-title"]').val('');
                     $('form#add-category').find('.messages').empty().append('<div class="alert alert-success" role="alert">' + response.message + "</div>");
-                    $('table#cat_table').append('')
-
+                    var tableContent = "<tr>" +
+                        "<td>" + response.catId + "</td>" +
+                        "<td>" + response.catTitle + "</td>" +
+                        "<td><a href='categories.php?delete=" + response.catId + "'>Delete</a></td>" +
+                        "<td><a href='categories.php?edit=" + response.catId + "'>Edit</a></td>" +
+                        "</tr>";
+                    $.each(response.tableData)
+                    $('tbody#cat_table').append(tableContent);
                 },
                 error: function (error, status, responseMessage) {
                     $('form#add-category').find('.messages').empty().append('<div class="alert alert-danger" role="alert">' + error.responseJSON.message + "</div>");
